@@ -1,0 +1,7 @@
+@import './base.css';
+
+/*@import '~@marcoschulte/vue3-progress/dist';*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
