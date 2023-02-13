@@ -6,6 +6,8 @@ import type * as Auth from 'Auth'
 interface AuthStoreState {
     isAuth: boolean
     profile: Auth.Profile | null
+    permissions: string[]
+    roles: string[]
 }
 
 interface AuthStoreGetters {
@@ -27,6 +29,8 @@ export const useAuthStore = defineStore('auth', {
         return {
             isAuth: false,
             profile: null,
+            permissions: [],
+            roles: [],
         }
     },
     getters: {},
@@ -48,7 +52,7 @@ export const useAuthStore = defineStore('auth', {
                 /*
                 * TODO
                 * */
-               this.profile = response.data[0]
+                this.profile = response.data[0]
                 return response
             }
             return response

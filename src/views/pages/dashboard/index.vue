@@ -23,42 +23,45 @@
                 </p>
             </div>
 
+            <div>
+                <Form
+                    :list="['vi', 'en']"
+                    @doneAction="handleDoneAction"
+                />
 
-            
+
+                <p v-if="$middleware.checkPermison('USER_LIST')"> checkPermisonOK</p>
+                <p v-if="$middleware.checkRole('ADMIN')"> checkRoleOK</p>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup name="TheDashboard">
+import Form from './components/form.vue'
+
+import { LanguageHelper } from '@/helpers/Language'
 import type { AppStore } from '@/stores/appStore'
 import { useAppStore } from '@/stores/appStore'
-import { LanguageHelper } from '@/helpers/Language'
+import type { AuthStore } from '@/stores/authStore'
+import { useAuthStore } from '@/stores/authStore'
 
 const { locale, t } = useI18n()
 const appStore: AppStore = useAppStore()
+const authStore: AuthStore = useAuthStore()
 
-// const form = reactive({
-//     email: '',
-//     password: ''
-// })
-// const email = ref('')
-// const password = ref('')
-
-// import { Field, Form, ErrorMessage } from 'vee-validate';
-// import * as yup from 'yup';
-// const emailRules = yup.string().required().email().min(8).label(t('auth.email'));
 
 const changeLanguage = (locale: string) => {
     LanguageHelper.setLocale(locale)
     appStore.setLocale(locale)
 }
 
-const submit = () => {
-    console.log('submit')
+const handleDoneAction = (value: boolean) => {
 }
 
-onMounted(() => {
 
+onMounted(() => {
+    authStore.me()
 })
 
 </script>

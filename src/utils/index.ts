@@ -9,6 +9,8 @@ import {
     toNumberNoRound,
 } from '@/utils/global'
 
+import { Middleware } from '@/helpers/Middleware'
+
 export const Utils = {
     install: (app: App) => {
         app.config.globalProperties.$filters = {
@@ -17,10 +19,16 @@ export const Utils = {
             replaceHiddenText,
         }
 
-        // VeeValidate
-        // app.use(VeeValidate)
-        // app.use(SocketIO)
+
+        app.config.globalProperties.$middleware = {
+            checkPermison: Middleware.checkPermison,
+            checkRole: Middleware.checkRole,
+        }
+
+        // app.use(VeeValidate) // VeeValidate
+        // app.use(SocketIO) // SocketIO
         app.use(Vue3ProgressPlugin)
+        app.use(Middleware.checkAuth)
 
         app.provide('Counter', 0)
     },

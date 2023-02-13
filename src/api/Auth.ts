@@ -16,7 +16,27 @@ export class AuthService {
 
     static async me(): Promise<ApiResponse> {
         try {
-            return await ApiService.instance().axios.get(Constant.AUTH_ME)
+            // return await ApiService.instance().axios.get(Constant.AUTH_ME)
+            const res = {
+                permissions: ['USER_LIST', 'USER_DETAIL', 'USER_UPDATE', 'USER_DELETE', 'USER_CREATE'],
+                roles: ['SUPER_ADMIN'],
+                email: 'super_amdin@gmail.com',
+                age: 30,
+                created_at: '2023-01-30T07:20:39.000000Z',
+                updated_at: '2023-01-30T07:20:39.000000Z',
+            }
+            return {
+                msg: 'suucess',
+                status: true,
+                code: 0,
+                data: [res],
+            }
+            /*return {
+                msg: 'authorization',
+                status: false,
+                code: 401,
+                data: [],
+            }*/
         } catch (e) {
             return FunctionHelper.responseCacheApi()
         }

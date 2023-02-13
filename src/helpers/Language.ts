@@ -21,8 +21,6 @@ export class LanguageHelper {
                     await this.setLanguage(langKey, languages)
                 }
             }
-
-
             return true
         } catch (e) {
             return false

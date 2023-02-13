@@ -1,5 +1,4 @@
 import type { App } from 'vue'
-// @ts-ignore
 import { io } from 'socket.io-client'
 import { AuthHelper } from '@/helpers/Auth'
 import { FunctionHelper } from '@/helpers/Function'
@@ -8,8 +7,7 @@ const socketOptions = {
     host: FunctionHelper.getSocketUrl(),
 }
 const options: any = {
-    // transports: ['polling'],
-    transports: ['websocket'],
+    transports: ['websocket'], /* polling */
     path: false,
     pingTimeout: 7000,
     pingInterval: 3000,
