@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { I18n } from '@/plugins/I18n'
 import { StorageService } from '@/services/StorageService'
-
-
+import moment from 'moment'
 
 export class LanguageHelper {
 
@@ -35,7 +34,8 @@ export class LanguageHelper {
      */
     static async getLanguage(lang: string = 'vi'): Promise<object> {
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_BASE_URL}/public/locales/${lang}.json?v=${(import.meta.env.VITE_VERSION || '1.0.0')}`)
+            const url = `${import.meta.env.VITE_BASE_URL}/public/locales/${lang}.json?v=${(import.meta.env.VITE_VERSION || '1.0.0')}&t=${moment().unix()}`
+            const { data } = await axios.get(url)
             return data
         } catch (e) {
             return {}

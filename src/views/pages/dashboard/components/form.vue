@@ -12,7 +12,8 @@
         </p>
 
 
-        <button class="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300" type="submit">
+
+        <button class="py-2 px-3 bg-indigo-500 text-white text-sm font-semibold rounded-md shadow focus:outline-none" tabindex="-1" type="submit">
             {{ $t('button.save') }}
         </button>
     </form>

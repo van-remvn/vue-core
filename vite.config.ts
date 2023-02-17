@@ -6,15 +6,14 @@ import * as path from 'path'
 import fs from 'fs'
 import AutoImport from 'unplugin-auto-import/vite'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend' //Setup name component
+import Icons from 'unplugin-icons/vite'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode, ssrBuild }) => {
+export default defineConfig(async ({ command, mode, ssrBuild }) => {
+
+    await generateLanguage()
 
     const env = loadEnv(mode, process.cwd(), '')
-
-    generateLanguage()
-        .then()
-        .catch()
 
     return {
         base: './',
@@ -27,6 +26,14 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
                 imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/core'],
                 dts: 'src/@types/auto-imports.d.ts',
             }),
+            Icons({
+                scale: 1.5, // Scale of icons against 1em
+                defaultStyle: '', // Style apply to icons
+                defaultClass: 'inline-block h-5 w-5 stroke-current md:h-6 md:w-6', // Class names apply to icons
+                compiler: 'vue3', // "vue2", "vue3", "jsx"
+                jsx: 'react', // "react" or "preact"
+                autoInstall: true,
+            }),
         ],
         node: {
             fs: 'empty',
@@ -36,6 +43,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
             alias: {
                 '@': fileURLToPath(new URL('./src', import.meta.url)),
                 '~node_modules': path.resolve(__dirname, 'node_modules'),
+                "~/": `${path.resolve(__dirname, "src")}/`,
             },
         },
         define: {
@@ -86,6 +94,12 @@ const generateLanguage = async () => {
         }
     }
 
-    console.log(`Generate Language Success`)
+    console.log(`
+╭─────────────────────────────────────────────────╮
+│                                                 │
+│            Generate Language Success            │
+│                                                 │
+╰─────────────────────────────────────────────────╯
+    `)
     return Promise.resolve()
 }

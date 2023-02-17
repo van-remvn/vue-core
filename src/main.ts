@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import Router from './router'
 
-import './assets/main.css'
+import './assets/style'
 import { Pinia } from '@/plugins/Pinia'
 import { I18n } from '@/plugins/I18n'
 import { Utils } from '@/utils'

@@ -1,5 +1,5 @@
+import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
-import type { AxiosInstance } from 'axios'
 import moment from 'moment'
 import { AuthHelper } from '@/helpers/Auth'
 
@@ -16,7 +16,7 @@ export class ApiService {
             baseURL: this._apiUrl,
         })
 
-        this._api.interceptors.request.use((config) => {
+        this._api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
             let url = config.url
             url = `${url}?t=${moment().unix()}`
             config.url = url
@@ -25,9 +25,9 @@ export class ApiService {
             return Promise.reject(error)
         })
 
-        this._api.interceptors.response.use((response) => {
+        this._api.interceptors.response.use((response: AxiosResponse) => {
             return response.data
-        }, function (error) {
+        }, (error) => {
             const res = {
                 status: error.response.status,
                 statusText: error.response.statusText,
@@ -44,8 +44,7 @@ export class ApiService {
     }
 
     public get axios(): AxiosInstance {
-        const hasToken = AuthHelper.hasToken()
-        if (hasToken) {
+        if (AuthHelper.hasToken()) {
             const token = AuthHelper.getToken()?.access_token
             this._api.defaults.headers.common['Authorization'] = `Bearer ${token}`
         }

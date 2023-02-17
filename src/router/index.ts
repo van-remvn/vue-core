@@ -1,17 +1,20 @@
-import type { RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import type { ProgressFinisher } from '@marcoschulte/vue3-progress'
 import { useProgress } from '@marcoschulte/vue3-progress'
 import { forEach } from 'lodash'
-
 import dashboardRoutes from './modules/dashboard'
 import authRoutes from './modules/auth'
 import errorRoutes from './modules/error'
+import profileRoutes from './modules/profile'
+import reportRoutes from './modules/report'
 
 
 const routes: Array<RouteRecordRaw> = [
-    ...dashboardRoutes,
     ...authRoutes,
+    ...dashboardRoutes,
+    ...profileRoutes,
+    ...reportRoutes,
     ...errorRoutes,
 ]
 
@@ -20,9 +23,9 @@ const Router = createRouter({
     routes,
 })
 
-let progresses = [] as ProgressFinisher[]
 
-Router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+let progresses = [] as ProgressFinisher[]
+Router.beforeEach(async () => {
     progresses.push(useProgress().start())
 })
 

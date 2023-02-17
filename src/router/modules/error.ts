@@ -16,7 +16,7 @@ export default [
         },
     },
     {
-        path: '/*',
+        path: '/:catchAll(.*)',
         name: 'catchAll',
         component: () => import('@/views/pages/error/404.vue'),
         meta: {

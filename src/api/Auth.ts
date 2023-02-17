@@ -16,8 +16,8 @@ export class AuthService {
 
     static async me(): Promise<ApiResponse> {
         try {
-            // return await ApiService.instance().axios.get(Constant.AUTH_ME)
-            const res = {
+            return await ApiService.instance().axios.get(Constant.AUTH_ME)
+            /*const res = {
                 permissions: ['USER_LIST', 'USER_DETAIL', 'USER_UPDATE', 'USER_DELETE', 'USER_CREATE'],
                 roles: ['SUPER_ADMIN'],
                 email: 'super_amdin@gmail.com',
@@ -30,8 +30,8 @@ export class AuthService {
                 status: true,
                 code: 0,
                 data: [res],
-            }
-            /*return {
+            }*/
+           /* return {
                 msg: 'authorization',
                 status: false,
                 code: 401,
