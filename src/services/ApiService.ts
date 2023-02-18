@@ -9,9 +9,12 @@ export class ApiService {
 
     private readonly _api: AxiosInstance
 
-    private readonly _apiUrl = import.meta.env.VITE_API_URL
+    private readonly _apiUrl: string
 
     constructor() {
+
+        this._apiUrl = import.meta.env.VITE_API_URL
+
         this._api = axios.create({
             baseURL: this._apiUrl,
         })

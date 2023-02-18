@@ -34,7 +34,7 @@ export class LanguageHelper {
      */
     static async getLanguage(lang: string = 'vi'): Promise<object> {
         try {
-            const url = `${import.meta.env.VITE_BASE_URL}/public/locales/${lang}.json?v=${(import.meta.env.VITE_VERSION || '1.0.0')}&t=${moment().unix()}`
+            const url = `${import.meta.env.VITE_BASE_URL}/locales/${lang}.json?v=${(import.meta.env.VITE_VERSION || '1.0.0')}&t=${moment().unix()}`
             const { data } = await axios.get(url)
             return data
         } catch (e) {
