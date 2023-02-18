@@ -13,7 +13,7 @@ export class ApiService {
 
     constructor() {
 
-        this._apiUrl = import.meta.env.VITE_API_URL
+        this._apiUrl = import.meta.env.VITE_API_URL?.toString()
 
         this._api = axios.create({
             baseURL: this._apiUrl,
